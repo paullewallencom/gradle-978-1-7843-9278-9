@@ -1,0 +1,33 @@
+apply plugin: 'ivy-publish'
+apply plugin: 'java'
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+publishing {
+
+    publications {
+
+        publishJar(IvyPublication) {
+
+            // Use artifacts property to 
+            // define the artifacts.
+            // The classifier for each of
+            // these artifacts must be
+            // unique.
+            artifacts = [
+                jar, 
+                sourcesJar, 
+                javaDocJar]
+
+        }
+
+    }
+}

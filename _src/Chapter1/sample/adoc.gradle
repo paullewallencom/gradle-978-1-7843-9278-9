@@ -1,0 +1,18 @@
+buildscript {
+    repositories {
+        // We need the repository definition, from
+        // where the dependency can be downloaded.
+        jcenter()
+    }
+
+    dependencies {
+        // Define external module dependency for the Gradle
+        // Asciidoctor plugin.
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:0.7.3'
+    }
+}
+
+// We defined the dependency on this external
+// Gradle plugin in the buildscript {...}
+// configuration block
+apply plugin: 'org.asciidoctor.gradle.asciidoctor'

@@ -1,0 +1,6 @@
+apply plugin: 'groovy'
+
+dependencies {
+    // Define dependency on Gradle classes.
+    compile gradleApi()
+}

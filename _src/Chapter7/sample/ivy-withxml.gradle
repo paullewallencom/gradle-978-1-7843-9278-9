@@ -1,0 +1,35 @@
+apply plugin: 'ivy-publish'
+apply plugin: 'java'
+
+version = '2.1.RELEASE'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+    publications {
+        sample(IvyPublication) {
+            from components.java
+
+            // Customize generated descriptor XML.
+            descriptor.withXml {
+                
+                asNode()
+                    .appendNode('description', 'Sample Gradle project')
+
+                asNode()
+                    .appendNode('issueManagement')
+                    .with {
+                        appendNode('system', 'Jenkins')    
+                        appendNode('url', 'http://buildserver/')
+                    }
+            }
+        }
+    }
+}

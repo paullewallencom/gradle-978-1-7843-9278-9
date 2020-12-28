@@ -1,0 +1,40 @@
+//tag::script[]
+apply plugin: 'base'
+
+configurations {
+    readmeDistribution
+}
+
+// New task that copies
+// a file to the build directory.
+task docFiles(type:Copy) {
+    from 'src/files'
+    into "${buildDir}/docs"
+    include 'README.txt'
+}
+
+artifacts {
+    // Define file artifact.
+    readmeDistribution(file("${buildDir}/docs/README.txt")) {
+        // Define which task is responsible
+        // for creating the file, so a 
+        // task dependency is added for
+        // the buildReadmeDistribution and
+        // uploadReadmeDistribution tasks.
+        builtBy docFiles
+    }
+}
+//end::script[]
+
+task artifactsInfo << {
+    // Find archives configuration
+    // and display file name(s)
+    // for artifacts belonging
+    // to the configuration.
+    configurations
+        .findByName('readmeDistribution')
+        .allArtifacts
+        .each { artifact ->
+            println "${artifact.name}:${artifact.type}:${artifact.classifier}"
+        }
+}

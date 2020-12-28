@@ -1,0 +1,18 @@
+repositories {
+    ivy {
+        // Use file protocol, for example an
+        // accessible network share or local directory.
+        url 'file://Volumes/shared/developers/repo'
+    }
+
+    maven {
+        url 'sftp://ourcompany.com:22/repo'
+
+        // With the sftp protocol we must provide
+        // the username and password.
+        credentials {
+            username 'developer'
+            password 'secret'
+        }
+    }
+}

@@ -1,0 +1,13 @@
+// Repositories configuration block, 
+// must be present to define and
+// configure repositories to get
+// dependencies in our build script.
+repositories {
+
+    // Sample Maven repository with a
+    // custom location.
+    maven {
+        url 'http://mycompany.net/maven'
+    }
+
+}

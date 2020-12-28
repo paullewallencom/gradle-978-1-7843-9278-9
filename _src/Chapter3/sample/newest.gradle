@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+dependencies {
+    // Define dependency on SLF4J API for
+    // compiling source files.
+    compile 'org.slf4j:slf4j-api:1.7.7'
+
+    // Define implementation Logback classic 
+    // of SLF4J API in runtime configuration.
+    // This has a transitive dependency on 
+    // org.slf4j:slf4j-api:1.7.6, which is a version
+    // conflict with org.slf4j:slf4j-api:1.7.7
+    runtime 'ch.qos.logback:logback-classic:1.1.2'
+}

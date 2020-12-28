@@ -1,0 +1,8 @@
+repositories {
+    jcenter {
+        // By default https is used as protocol,
+        // but we can change it with the url
+        // property.
+        url = 'http://jcenter.bintray.com'
+    }
+}

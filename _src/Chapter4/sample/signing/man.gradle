@@ -1,0 +1,43 @@
+apply plugin: 'signing'
+
+version = '1.0'
+
+// New archive task to create
+// a ZIP file from some files.
+task manualZip(type: Zip) {
+    archivesBaseName = 'manual'
+    from 'src/docroot'
+}
+
+// Create new configuration for
+// ZIP and signed ZIP artifacts.
+configurations {
+    manualDistribution
+}
+
+// Set artifacts to manualDistribution 
+// configuration.
+artifacts {
+    manualDistribution(manualZip, tasks.findByName('signManualZip'))
+}
+
+// Configure signing plugin to
+// sign the output of the 
+// manualZip task.
+signing {
+    sign configurations.manualDistribution
+}
+
+
+// Configure upload task for
+// manualDistribution configuration.
+uploadManualDistribution {
+    repositories {
+        flatDir {
+            dirs "${projectDir}/repo"
+        }
+    }
+}
+// Add task dependency so signing of 
+// ZIP file is done before upload.
+//uploadManualDistribution.dependsOn signManualZip

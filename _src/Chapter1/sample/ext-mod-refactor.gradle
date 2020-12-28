@@ -1,0 +1,20 @@
+// Define project property with 
+// dependency group name 'com.vehicles'
+ext {
+    groupNameVehicles = 'com.vehicles'
+}
+
+configurations {
+    vehicles
+    traffic.extendsFrom vehicles
+}
+
+dependencies {
+    // Using Groovy string support with
+    // variable substition.
+    vehicles "$groupNameVehicles:car:1.0"
+
+    // Using map notation and reference 
+    // property groupNameVehicles.
+    vehicles group: groupNameVehicles, name: 'truck', version: '2.0'
+}

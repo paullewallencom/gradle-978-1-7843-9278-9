@@ -1,0 +1,27 @@
+apply plugin: 'ivy-publish'
+apply plugin: 'java'
+
+// Configuration block for publishing
+// artifacts from the project.
+publishing {
+
+    // Define publications with what
+    // needs to be published.
+    publications {
+
+        // Name of this publication
+        // is publishJar.
+        publishJar(IvyPublication) {
+
+            // Use output of jar task
+            // as the artifact for 
+            // the publication.
+            artifact jar
+
+            // Alternatively we can use
+            // a Map notation:
+            // artifact source: jar
+        }
+
+    }
+}

@@ -1,0 +1,13 @@
+configurations {
+    vehicles
+    traffic.extendsFrom vehicles
+}
+
+dependencies {
+
+    // Use the 'jar' configuration defined in the
+    // module descriptor for this dependency.
+    traffic group: 'com.traffic', name: 'pedestrian', version: '1.0', 
+            configuration: 'jar'
+
+}

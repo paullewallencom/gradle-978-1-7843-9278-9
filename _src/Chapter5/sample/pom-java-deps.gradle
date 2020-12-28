@@ -1,0 +1,45 @@
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+
+version = '2.1.RELEASE'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+    publications {
+        sample(MavenPublication) {
+            artifact jar
+
+            pom.withXml {
+                // Create dependencies element.
+                def dependencies = 
+                    asNode()
+                        .appendNode('dependencies')
+
+                project
+                    .configurations['compile']
+                    .allDependencies
+                    ?.each { dependency ->
+
+                        // Add a dependency element with
+                        // groupId, artifactId, version and scope,
+                        // to the dependencies element.
+                        dependencies.appendNode('dependency').with { 
+                            appendNode('groupId', dependency.group)
+                            appendNode('artifactId', dependency.name)
+                            appendNode('version', dependency.version)
+                            appendNode('scope', 'compile')
+                        }
+
+                    }
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+ext {
+    // Group is used multiple times, so
+    // we extra the variable for re-use.
+    def vehiclesGroup = 'com.vehicles'
+
+    // libs will be available from within
+    // the Gradle script code, like dependencies {...}.
+    libs = [
+        vehicles: [
+            [group: vehiclesGroup, name: 'car', version: '2.0'],
+            [group: vehiclesGroup, name: 'truck', version: '1.0']
+        ],
+        traffic: [
+            [group: 'com.traffic', name: 'pedestrian', version: '1.0']
+        ]
+    ]
+}
+
+configurations {
+    vehicles
+}
+
+dependencies {
+    // Reference ext.libs.vehicles defined earlier
+    // in the build script.
+    vehicles libs.vehicles
+}

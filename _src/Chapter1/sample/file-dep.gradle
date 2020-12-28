@@ -1,0 +1,16 @@
+configurations {
+    vehicles
+    traffic.extendsFrom vehicles
+}
+
+dependencies {
+    // Define a dependency on explicit file(s).
+    vehicles files(
+        'lib/vehicles/car-2.0.jar', 
+        'lib/vehicles/truck-1.0.jar'
+    )
+
+    // We can use the fileTree method to include
+    // multiples from a directory and it's subdirectories.
+    traffic fileTree(dir: 'deps', include: '*.jar')
+}

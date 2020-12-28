@@ -1,0 +1,41 @@
+apply plugin: 'java'
+
+// Define project properties.
+group = 'com.mrhaki.sample'
+version = '2.1'
+archivesBaseName = 'sample'
+
+// We create a new source set
+// api, which contains the 
+// Java sources. This means
+// Gradle will search for the 
+// directory src/api/java.
+sourceSets {
+    api
+}
+
+task apiJar(type: Jar) {
+    appendix = 'api'
+
+    // We use the output of the
+    // compilation of the api
+    // source set, to be the
+    // contents of this JAR file.
+    from sourceSets.api.output
+}
+
+artifacts {
+    // Assign apiJar archive task to the
+    // archives configuration.
+    archives apiJar
+}
+
+// Extra task to check the artifacts.
+task artifactsInfo << {
+    configurations
+        .findByName('archives')
+        .allArtifacts
+        .each { artifact ->
+            println artifact.file.name
+        }
+}

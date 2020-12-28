@@ -1,0 +1,24 @@
+buildscript {
+    repositories {
+        // Bintray JCenter repository to download
+        // dependency commons-lang3.
+        jcenter()
+    }
+
+    dependencies {
+        // Extend classpath of build script with
+        // the classpath configuration.
+        classpath 'org.apache.commons:commons-lang3:3.3.2'
+    }
+}
+
+// We have add the commons-lang3 dependency
+// as a build script dependency so we can
+// reference classes for Apache Commons Lang.
+import org.apache.commons.lang3.RandomStringUtils
+
+task randomString << {
+    // Use RandomStringUtils from Apache Commons Lang.
+    String value = RandomStringUtils.randomAlphabetic(10)
+    println value
+}

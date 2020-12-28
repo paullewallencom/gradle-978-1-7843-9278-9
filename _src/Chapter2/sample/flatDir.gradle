@@ -1,0 +1,15 @@
+repositories {
+
+    // Define the directories jars and lib 
+    // to be used as repositories.
+    flatDir {
+        name 'Local lib directory'
+        dirs "${projectDir}/jars", "${projectDir}/lib"
+    }
+
+    // Alternate syntax is using a Map 
+    // with the flatDir method.
+    // flatDir name: 'Local lib directory', 
+    //         dirs: ["${projectDir}/jars", "${projectDir}/lib"]
+
+}

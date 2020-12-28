@@ -1,0 +1,14 @@
+// Compact definition of configurations.
+configurations {
+    vehicles
+    traffic.extendsFrom vehicles
+}
+
+// Define dependencies.
+dependencies {
+    // Defining two dependencies.
+    vehicles 'com.vehicles:car:1.0', 'com.vehicles:truck:2.0'
+
+    // Single dependency.
+    traffic 'com.traffic:pedestrian:1.0'
+}

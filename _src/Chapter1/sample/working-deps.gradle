@@ -1,0 +1,44 @@
+configurations {
+    vehicles
+    traffic.extendsFrom vehicles
+}
+
+task dependencyFiles << {
+    // Loop through all files for the dependencies
+    // for the traffic configuration, including 
+    // transitive dependencies.
+    configurations.traffic.files.each { file ->
+        println file.name
+    }
+
+    // We can also filter the files using 
+    // a closure. For example to only find the files
+    // for dependencies with driver in the name.
+    configurations.vehicles.files { dep ->
+        if (dep.name.contains('driver')) {
+            println dep.name
+        }
+    }
+
+    // Get information about dependencies only belonging
+    // to the vehicles configuration.
+    configurations.vehicles.dependencies.each { dep ->
+        println "${dep.group} / ${dep.name} / ${dep.version}"
+    }
+
+    // Get information about dependencies belonging
+    // to the traffice configuration and
+    // configurations it extends from.
+    configurations.traffic.allDependencies.each {  dep ->
+        println "${dep.group} / ${dep.name} / ${dep.version}"
+    }
+}
+
+task copyDependencies(type: Copy) {
+    description = 'Copy dependencies from configuration traffic to lib directory'
+
+    // Configuration can be the source for a CopySpec.
+    from configurations.traffic
+    
+    into "$buildDir/lib"
+}

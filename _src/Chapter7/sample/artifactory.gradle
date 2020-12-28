@@ -1,0 +1,41 @@
+apply plugin: 'ivy-publish'
+apply plugin: 'java'
+
+version = '2.1.DEVELOPMENT'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+
+    publications {
+        publishJar(IvyPublication) {
+            module = 'sample'
+
+            from components.java
+        }
+    }
+
+    // Add a Artifactory repository for
+    // the publications with Maven layout.
+    repositories {
+        ivy {
+            name = 'artifactory'
+            url = "http://localhost:8081/artifactory/libs-release-local"
+
+            // Username and password should be 
+            // saved outside build file in 
+            // real life, eg. in gradle.properties.
+            credentials {
+                username = 'user'
+                password = 'passw0rd'
+            }
+        }
+    }
+}

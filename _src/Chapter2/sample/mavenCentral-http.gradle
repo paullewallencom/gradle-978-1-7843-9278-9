@@ -1,0 +1,7 @@
+repositories {
+    mavenCentral(
+        // Use http protocol for the 
+        // central Maven repository.
+        url: 'http://repo1.maven.org/maven2/'
+    )
+}

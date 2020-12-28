@@ -1,0 +1,45 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+configurations {
+    runtime {
+        resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                def requestedModule = details.requested
+
+                // If version is not set or version has value 'fixed' set
+                // version based on external definition.
+                if (!requestedModule.version 
+                    || requestedModule.version == 'fixed') {
+                    def moduleVersion = findModuleVersion(requestedModule.name)
+                    details.useVersion moduleVersion
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    // Version is not defined for this dependency,
+    // is resolved via custom dependency resolve rule.
+    compile 'org.slf4j:slf4j-api'
+
+    // Version is set to 'fixed', so version can
+    // be resolved via custom dependency resolve rule.
+    runtime 'ch.qos.logback:logback-classic:fixed'
+}
+
+/**
+ * Find version for given module name. In real life
+ * this could be part of a company Gradle plugin
+ * or intranet resource with version information.
+ *
+ * @param name Module descriptor name
+ * @return Version for given module name
+ */
+def findModuleVersion(String name) {
+    ['slf4j-api': '1.7.7', 'logback-classic': '1.1.2']
+    .find { it.key == name}
+    .value
+}

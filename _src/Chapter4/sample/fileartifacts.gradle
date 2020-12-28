@@ -1,0 +1,14 @@
+//tag::script[]
+apply plugin: 'base'
+
+configurations {
+    readmeDistribution
+}
+
+artifacts {
+    // Use a file as artifact.
+    // Name and extension are extracted
+    // from the actual file.
+    readmeDistribution file('src/files/README.txt')
+}
+//end::script[]

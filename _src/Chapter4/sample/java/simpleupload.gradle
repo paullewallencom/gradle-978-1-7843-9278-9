@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+// Define project properties.
+group = 'com.mrhaki.sample'
+version = '2.1'
+archivesBaseName = 'sample'
+
+// Configure the uploadArchives task.
+uploadArchives {
+    // Define a local directory as the
+    // upload repository. The artifacts
+    // must be 'published' in this
+    // directory.
+    repositories {
+        flatDir(
+            name: 'upload-repository',
+            dirs: "${projectDir}/lib-repo")
+    }
+}

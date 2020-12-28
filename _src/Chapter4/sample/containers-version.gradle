@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+archivesBaseName = 'java_lib'
+
+// Set project version,
+// which is then used in the 
+// artifact name.
+version = '2.3'
+
+task artifactsInfo << {
+    configurations
+        .findByName('archives')
+        .allArtifacts
+        .each { artifact ->
+            println artifact.file.name
+        }
+}

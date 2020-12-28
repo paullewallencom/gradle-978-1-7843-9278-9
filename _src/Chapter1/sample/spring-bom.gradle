@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        // Specific repository to find and download
+        // dependency-management-plugin.
+        maven { 
+            url 'http://repo.spring.io/plugins-snapshot'
+        }
+    }
+    dependencies {
+        // Define external module dependency with plugin.
+        classpath 'io.spring.gradle:dependency-management-plugin:0.1.0.RELEASE'
+    }
+}
+
+// Apply the external plugin dependency-management.
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+
+repositories {
+    // Repository for downloading BOM and dependencies.
+    jcenter()
+}
+
+// This block is added by the dependency-management
+// plugin to define dependency metadata.
+dependencyManagement {
+    imports {
+        // Use Maven BOM provided by Spring IO platform.
+        mavenBom 'io.spring.platform:platform-bom:1.0.1.RELEASE'
+    }
+}
+
+dependencies {
+    // Version is resolved via Maven BOM.
+    compile 'org.springframework.boot:spring-boot-starter-web'
+}

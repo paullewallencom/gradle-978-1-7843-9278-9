@@ -1,0 +1,25 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+configurations {
+    runtime {
+        resolutionStrategy {
+            failOnVersionConflict()
+        }
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.7'
+
+    // Use a client module to redefine the transitive
+    // dependencies for the logback-classic.
+    runtime module('ch.qos.logback:logback-classic:1.1.2') {
+        dependency 'ch.qos.logback:logback-core:1.1.2'
+
+        // Force the correct version of 
+        // the slf4j-api dependency/
+        dependency 'org.slf4j:slf4j-api:1.7.7'
+    }
+}

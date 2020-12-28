@@ -1,0 +1,27 @@
+configurations {
+    vehicles
+    traffic.extendsFrom vehicles
+}
+
+dependencies {
+    // Using the @ext notation to specify
+    // we only want the artifact for this
+    // dependency.
+    vehicles 'com.vehicles:car:2.0@jar'
+
+    // Use map notation with ext attribute
+    // to specify artifact only dependency.
+    traffic group: 'com.traffic', name: 'pedestrian', 
+            version: '1.0', ext: 'jar'
+
+    // Alternatively we can use the configuration closure.
+    // We need to specify an artifact configuration closure
+    // as well to define the ext attribute.
+    vehicles('com.vehicles:car:2.0') {
+        artifact {
+            name = 'car-docs'
+            type = 'tar'
+            extension = 'tar'
+        }
+    }
+}

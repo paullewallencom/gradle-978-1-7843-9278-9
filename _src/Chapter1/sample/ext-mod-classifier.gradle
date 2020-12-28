@@ -1,0 +1,23 @@
+dependencies {
+    // Using string notation we can
+    // append the classifier after
+    // the version attribute, prefixed
+    // with a colon.
+    vehicles 'com.vehicles:car:2.0:jdk15'
+
+    // With the map notation we simply use the
+    // classifier attribute name and the value.
+    traffic group: 'com.traffic', name: 'pedestrian', 
+            version: '1.0', classifier: 'jdk16'
+
+    // Alternatively we can use the configuration closure.
+    // We need to specify an artifact configuration closure
+    // as well to define the classifier attribute.
+    vehicles('com.vehicles:truck:2.0') {
+        artifact {
+            name = 'truck'
+            type = 'jar'
+            classifier = 'jdk15'
+        }
+    }
+}

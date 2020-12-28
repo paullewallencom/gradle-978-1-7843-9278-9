@@ -1,0 +1,31 @@
+apply plugin: 'ivy-publish'
+apply plugin: 'java'
+
+version = '2.1.RELEASE'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+    publications {
+        sample(IvyPublication) {
+            from components.java
+
+            descriptor.withXml {
+                // Replace value for module attribute
+                // in info element.
+                new StringBuilder(
+                    asString()
+                        .replaceAll(
+                            /module="sample"/, 
+                            'module="ivyChapter"'))
+            }
+        }
+    }
+}

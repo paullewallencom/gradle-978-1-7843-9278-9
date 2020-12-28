@@ -1,0 +1,5 @@
+repositories {
+    // Define the local Maven cache as
+    // a repository for dependencies.
+    mavenLocal()
+}

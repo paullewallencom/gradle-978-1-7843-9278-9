@@ -1,0 +1,37 @@
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+
+version = '2.1.DEVELOPMENT'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+
+    publications {
+        publishJar(MavenPublication) {
+            artifactId = 'sample'
+
+            from components.java
+        }
+    }
+
+    // Add a Maven repository for
+    // the publications.
+    repositories {
+        maven {
+            name = 'nexus'
+            url = "http://localhost:8081/nexus/content/repositories/releases"
+            credentials {
+                username = 'admin'
+                password = 'admin123'
+            }
+        }
+    }
+}

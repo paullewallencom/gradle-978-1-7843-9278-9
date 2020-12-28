@@ -1,0 +1,22 @@
+configurations {
+    vehicles
+    traffic.extendsFrom vehicles
+}
+
+dependencies {
+    // Use project method to define project
+    // dependency on car project.
+    vehicles project(':car')
+
+    // Define project dependency on truck
+    // and use dependency configuration api
+    // from that project.
+    vehicles project(':truck') {
+        configuration = 'api'
+    }
+
+    // We can use alternative syntax 
+    // to specify a configuration.
+    traffic project(path: ':pedestrian', 
+                    configuration: 'lib')
+}

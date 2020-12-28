@@ -1,0 +1,9 @@
+repositories {
+    flatDir name: 'Local lib directory',
+            dirs: ["${projectDir}/lib"]
+}
+
+dependencies {
+    traffic group: 'com.traffic', name: 'pedestrian', 
+            version: '1.0', classifier: 'jdk16'
+}

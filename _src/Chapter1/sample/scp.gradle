@@ -1,0 +1,45 @@
+configurations {
+    // We define a new dependency configuration.
+    // This configuration is used to assign 
+    // dependencies to, that are needed by the
+    // optional Ant task scp.
+    sshAntTask
+}
+
+repositories {
+    // Repository definition to download dependencies.
+    jcenter()
+}
+
+dependencies {
+    // Define external module dependencies
+    // for the scp Ant task.
+    sshAntTask(group: 'org.apache.ant', name: 'ant-jsch', version: '1.9.4')
+}
+
+// New task that used Ant scp task.
+task copyRemote(
+    description: 'Secure copy files to remote server') << {
+
+    // Define optional Ant task scp.
+    ant.taskdef(
+        name: 'scp', 
+        classname: 'org.apache.tools.ant.taskdefs.optional.ssh.Scp',
+
+        // Set classpath based on dependencies assigned
+        // to sshAntTask configuration. The asPath property
+        // returns a platform-specific string value
+        // with the dependency JAR files. 
+        classpath: configurations.sshAntTask.asPath)
+
+    // Invoke scp task we just defined.
+    ant.scp(
+        todir: 'user@server:/home/user/upload',
+        keyFile: '${user.home}/.ssh/id_rsa',
+        passphrase: '***',
+        verbose: true) {
+        fileset(dir: 'html/files') {
+            include name: '**/**'
+        }
+    }
+}

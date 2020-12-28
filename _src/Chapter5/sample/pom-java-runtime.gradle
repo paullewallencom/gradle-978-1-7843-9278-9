@@ -1,0 +1,38 @@
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+
+version = '2.1.RELEASE'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+    publications {
+        sample(MavenPublication) {
+            from components.java
+
+            pom.withXml {
+                asNode()
+                    .dependencies
+                    .dependency
+                    .findAll { dependency ->
+                        // Find all with scope runtime.
+                        // Could be more specific if we would
+                        // have more dependencies. For example
+                        // check group, name and version.
+                        dependency.scope.text() == 'runtime'
+                    }
+                    .each { dependency ->
+                        // Set scope value to compile.
+                        dependency.scope*.value = 'compile'
+                    }
+            }
+        }
+    }
+}

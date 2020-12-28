@@ -1,0 +1,72 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+configurations {
+    compile {
+        exclude module: 'slf4j-api'
+    }
+}
+
+dependencies {
+    compile('ch.qos.logback:logback-classic:1.1.2') {
+        exclude group: 'ch.qos.logback', module: 'logback-core'
+    }
+}
+
+task showExcludeRules {
+    description 'Show exclude rules for configurations and dependencies'
+
+    doFirst {
+        // Store found exclude rules.
+        def excludes = []
+
+        // Go through all configurations to find exclude rules
+        // defined at configuration level and at 
+        // dependency level for dependencies in the configuration.
+        configurations.all.each { configuration ->
+            def configurationExcludes = configuration.excludeRules
+            configurationExcludes.findAll().each { rule ->
+                // Add found excludeRule to excludes collection.
+                excludes << [type: 'container', 
+                             id: configuration.name, 
+                             excludes: rule]
+            }
+
+            def dependencies = configuration.allDependencies
+            dependencies.all { dependency ->
+                def excludeRules = dependency.excludeRules
+
+                excludeRules.findAll().each { rule ->
+                    def dep = dependency
+                    def id = "${dep.group}:${dep.name}:${dep.version}"
+                    // Add found excludeRule to excludes collection.
+                    excludes << [type: 'dependency', id: id, excludes: rule]
+                }
+            }
+        }    
+    
+        // Printing exclude rule information for output.    
+        def printExcludeRule = {
+            def rule = "${it.excludes.group ?: '*'}:${it.excludes.module ?: '*'}"
+            println "$it.id >> $rule"
+        }
+
+        // Print formatted header for output.
+        def printHeader = { header ->
+            println()
+            println '-' * 60
+            println header
+            println '-' * 60
+        }
+
+        // Group rules by organisation or dependency.
+        def excludeRules = excludes.groupBy { it.type }
+
+        printHeader 'Configurations'
+        excludeRules.container.toSet().each(printExcludeRule)
+
+        printHeader 'Dependencies'
+        excludeRules.dependency.toSet().each(printExcludeRule)
+    }
+}

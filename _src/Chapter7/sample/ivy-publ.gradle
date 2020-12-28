@@ -1,0 +1,31 @@
+apply plugin: 'ivy-publish'
+apply plugin: 'java'
+
+version = '2.1.DEVELOPMENT'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+    publications {
+        sample(IvyPublication) {
+            organisation = 'book.sample.gradle'
+            module ='bookSample'
+            version = '2.1'
+            descriptor.status = 'published'
+            descriptor.branch = 'n/a'
+
+            // Add extra element as child
+            // for info.
+            descriptor.extraInfo '', 'ivyauthor', 'Hubert Klein Ikkink'
+
+            from components.java
+        }
+    }
+}

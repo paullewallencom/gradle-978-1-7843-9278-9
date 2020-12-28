@@ -1,0 +1,33 @@
+apply plugin: 'ivy-publish'
+apply plugin: 'java'
+
+version = '2.1.DEVELOPMENT'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+
+    publications {
+        publishJar(IvyPublication) {
+            module = 'sample'
+
+            from components.java
+        }
+    }
+
+    // Add a local director as repository 
+    // for the publications.
+    repositories {
+        ivy {
+            name = 'localRepo'
+            url = "$buildDir/localRepo"
+        }
+    }
+}

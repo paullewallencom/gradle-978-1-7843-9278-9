@@ -1,0 +1,30 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+configurations {
+    runtime {
+        resolutionStrategy {
+            failOnVersionConflict()
+
+            // Customize dependency resolve rules.
+            eachDependency { DependencyResolveDetails details ->
+                def requestedModule = details.requested
+
+                // Force version for org.slf4j:slf4j-api dependency.
+                if (requestedModule.group == 'org.slf4j' 
+                    && requestedModule.name == 'slf4j-api') {
+
+                    // Force version 1.7.7.
+                    details.useVersion '1.7.7'
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.7'
+
+    runtime 'ch.qos.logback:logback-classic:1.1.2'
+}

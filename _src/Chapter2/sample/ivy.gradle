@@ -1,0 +1,10 @@
+repositories {
+
+    // Define an Ivy repository with
+    // a URL and optional name property.
+    ivy {
+        name 'Ivy Repository'
+        url 'http://ourompany.com/repo'
+    }
+
+}

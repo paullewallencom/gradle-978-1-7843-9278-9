@@ -1,0 +1,5 @@
+repositories {
+    // Define central Maven repository
+    // to use for dependencies.
+    mavenCentral()
+}

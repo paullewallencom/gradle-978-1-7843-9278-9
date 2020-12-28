@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+  <info organisation="book.sample.gradle" module="bookSample" branch="n/a" revision="2.1.DEVELOPMENT" status="published" publication="20150424053039">
+    <ns:ivyauthor xmlns:ns="">Hubert Klein Ikkink</ns:ivyauthor>
+  </info>
+  <configurations>
+    <conf name="default" visibility="public" extends="runtime"/>
+    <conf name="runtime" visibility="public"/>
+  </configurations>
+  <publications>
+    <artifact name="bookSample" type="jar" ext="jar" conf="runtime"/>
+  </publications>
+  <dependencies>
+    <dependency org="org.springframework" name="spring-context" rev="4.1.4.RELEASE" conf="runtime-&gt;default"/>
+  </dependencies>
+</ivy-module>

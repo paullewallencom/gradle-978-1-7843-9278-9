@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // The dependency will resolve to version 4.0.3.RELEASE as
+    // the latest version if available. Otherwise 4.0.2.RELEASE
+    // or 4.0.1.RELEASE.
+    compile 'org.springframework:spring-context:[4.0.1.RELEASE,4.0.4.RELEASE['
+}

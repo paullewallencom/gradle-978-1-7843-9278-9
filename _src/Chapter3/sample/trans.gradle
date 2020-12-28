@@ -1,0 +1,9 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+dependencies {
+    // Dependency definition for Logback classic
+    // library, used as implementation for SLF4J API.
+    compile 'ch.qos.logback:logback-classic:1.1.2'
+}

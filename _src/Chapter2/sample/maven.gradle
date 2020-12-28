@@ -1,0 +1,14 @@
+repositories {
+
+    // Define a custom Maven repository and
+    // set the url property so Gradle can look
+    // for the dependency module descripts 
+    // and artifacts.
+    maven {
+        url = 'http://ourcompany.com/maven'
+        // Alternative syntax is to use
+        // the url method:
+        // url 'http://ourcompany.com/maven'
+    }
+
+}

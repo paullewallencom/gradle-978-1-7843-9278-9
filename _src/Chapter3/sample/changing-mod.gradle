@@ -1,0 +1,20 @@
+apply plugin: 'java'
+
+repositories {
+    maven {
+        url 'http://ourcompany.com/maven'
+    }
+}
+
+dependencies {
+    compile('com.vehicles:cars:1.0') {
+        // Instruct Gradle this a changing
+        // module, although it cannot
+        // be derived from the version attribute.
+        changing = true
+    }
+
+    // Other syntax using the map notation:
+    // compile group: 'com.vehicles', name: 'cars',
+    //         version: '1.0', changing: true
+}

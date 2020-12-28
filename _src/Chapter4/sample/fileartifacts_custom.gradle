@@ -1,0 +1,31 @@
+//tag::script[]
+apply plugin: 'base'
+
+configurations {
+    readmeDistribution
+}
+
+artifacts {
+    // Define file artifact, but we also
+    // customize the file artifact
+    // name, extension and classifier.
+    readmeDistribution file('src/files/README.txt'), {
+        name 'PLEASE_READ_THIS'
+        extension ''
+        classifier 'docs'
+    }
+}
+//end::script[]
+
+task artifactsInfo << {
+    // Find archives configuration
+    // and display file name(s)
+    // for artifacts belonging
+    // to the configuration.
+    configurations
+        .findByName('readmeDistribution')
+        .allArtifacts
+        .each { artifact ->
+            println "${artifact.name}:${artifact.type}:${artifact.classifier}"
+        }
+}

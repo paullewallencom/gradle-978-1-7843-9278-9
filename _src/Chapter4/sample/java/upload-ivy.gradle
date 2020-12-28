@@ -1,0 +1,18 @@
+apply plugin: 'java'
+
+// Define project properties.
+group = 'com.mrhaki.sample'
+version = '2.1'
+archivesBaseName = 'sample'
+
+uploadArchives {
+    // Exclude the descriptor file.
+    uploadDescriptor = false
+
+    repositories {
+        flatDir(dirs: "${projectDir}/lib-repo")
+        ivy {
+            layout 'gradle'
+        }
+    }
+}

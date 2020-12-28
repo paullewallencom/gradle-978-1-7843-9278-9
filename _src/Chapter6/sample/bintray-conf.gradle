@@ -1,0 +1,57 @@
+// Define Bintray plugin.
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+    }
+}
+
+// Apply plugin to project.
+apply plugin: 'com.jfrog.bintray'
+
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+
+version = '1.0.RELEASE'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+    publications {
+        sample(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+bintray {
+    
+    // Use externalized project property bintrayUsername.
+    user = bintrayUsername
+
+    // Use externalized project property bintrayApiKey.
+    key = bintrayApiKey
+
+    // Define publication that needs to be published
+    // to Bintray.
+    publications = ['sample']
+
+    pkg {
+        // Name of repository in Bintray
+        repo = 'book-sample'
+
+        // Name for package.
+        name = 'sample'
+    }
+
+}

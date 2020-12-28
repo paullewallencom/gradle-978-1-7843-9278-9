@@ -1,0 +1,24 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+configurations {
+    compile {
+        // Exclude slf4j-api transitive dependency.
+        exclude module: 'slf4j-api'
+        // Alternative syntax:
+        // Exclude all modules in the group org.slf4j:
+        // exclude group: 'org.slf4j' 
+        // Or specify both group and module name:
+        // exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+
+    // To exclude a module and/or group from all configurations
+    // we can use the all method:
+    // all { exclude module: 'slf4j-api' }
+}
+
+dependencies {
+    // Dependency definition for Logback classic.
+    compile('ch.qos.logback:logback-classic:1.1.2')
+}

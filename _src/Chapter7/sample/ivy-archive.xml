@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+  <info organisation="book.gradle" module="sample" revision="2.1.RELEASE" status="integration" publication="20150424053351"/>
+  <configurations/>
+  <publications>
+    <artifact name="sample" type="jar" ext="jar"/>
+  </publications>
+  <dependencies/>
+</ivy-module>

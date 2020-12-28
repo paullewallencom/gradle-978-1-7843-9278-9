@@ -1,0 +1,21 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+configurations {
+    runtime {
+        resolutionStrategy {
+            failOnVersionConflict()
+        }
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.7', { 
+        // Force Gradle to use this version
+        // for this dependency (even transtive).
+        force = true
+    }
+
+    runtime 'ch.qos.logback:logback-classic:1.1.2'
+}

@@ -1,0 +1,7 @@
+apply plugin: 'groovy'
+
+dependencies {
+    // Define dependency on Groovy
+    // version shipped with Gradle.
+    compile localGroovy()
+}

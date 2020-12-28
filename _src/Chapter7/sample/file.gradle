@@ -1,0 +1,29 @@
+//tag::file[]
+apply plugin: 'ivy-publish'
+
+publishing {
+    publications {
+        documentation(IvyPublication) {
+
+            // Use file name as a publication artifact.
+            artifact 'src/files/README'
+
+            artifact('src/files/COPYRIGHT') {
+                // Each file artifact must have a
+                // unique classifier and extension.
+                classifier = 'metaInformation'
+            }
+
+            // Alternative syntax is with
+            // the Map notation:
+            // artifact source: 'src/files/README'
+            // artifact source: 'src/files/COPYRIGHT', 
+            //          extension: 'metaInformation'
+            
+        }
+    }
+}
+//end::file[]
+
+group = 'sample'
+version = '1.0-SNAPSHOT'

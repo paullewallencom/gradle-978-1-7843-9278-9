@@ -1,0 +1,14 @@
+// Define new configurations for build.
+configurations {
+
+    // Define configuration vehicles.
+    vehicles {
+        description = 'Contains vehicle dependencies'
+    }
+
+    traffic {
+        extendsFrom vehicles
+        description = 'Contains traffic dependencies'
+    }
+
+}

@@ -1,0 +1,27 @@
+apply plugin: 'ivy-publish'
+apply plugin: 'java'
+
+// Defined project properties, that are 
+// used in the generated POM file.
+// The name of the project is by default
+// the directory name, but we can
+// change it via a settings.gradle file
+// and the rootProject.name property.
+version = '2.1.RELEASE'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+    publications {
+        sample(IvyPublication) {
+            artifact jar
+        }
+    }
+}

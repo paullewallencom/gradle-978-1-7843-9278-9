@@ -1,0 +1,38 @@
+apply plugin: 'java'
+
+// Define project properties.
+group = 'com.mrhaki.sample'
+version = '2.1'
+archivesBaseName = 'sample'
+
+// Create a JAR file with the 
+// Java source files.
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+
+    from sourceSets.main.allJava
+}
+
+// Create a JAR file with the output
+// of the javadoc task.
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+
+    from javadoc
+}
+
+artifacts {
+    // Add the new archive tasks
+    // to the artifacts configuration.
+    archives sourcesJar, javadocJar
+}
+
+// Extra task to check the artifacts.
+task artifactsInfo << {
+    configurations
+        .findByName('archives')
+        .allArtifacts
+        .each { artifact ->
+            println artifact.file.name
+        }
+}

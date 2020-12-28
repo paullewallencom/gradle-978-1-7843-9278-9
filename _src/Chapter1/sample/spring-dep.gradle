@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        // Specific repository to find and download
+        // dependency-management-plugin.
+        maven { 
+            url 'http://repo.spring.io/plugins-snapshot'
+        }
+    }
+    dependencies {
+        // Define external module dependency with plugin.
+        classpath 'io.spring.gradle:dependency-management-plugin:0.1.0.RELEASE'
+    }
+}
+
+// Apply the external plugin dependency-management.
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+
+repositories {
+    // Repository for downloading dependencies.
+    jcenter()
+}
+
+// This block is added by the dependency-management
+// plugin to define dependency metadata.
+dependencyManagement {
+    dependencies {
+        // Specify group:name followed by required version.
+        'org.springframework.boot:spring-boot-starter-web' '1.1.5.RELEASE'
+
+        // If we have multiple module names for the same group
+        // and version we can use dependencySet.
+        dependencySet(group: 'org.springframework.boot', 
+                      version: '1.1.5.RELEASE') {
+            entry 'spring-boot-starter-web'
+            entry 'spring-boot-starter-actuator'
+        }
+    }
+}
+
+dependencies {
+    // Version is resolved via dependencies metadata
+    // defined in dependencyManagement.
+    compile 'org.springframework.boot:spring-boot-starter-web'
+}

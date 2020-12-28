@@ -1,0 +1,39 @@
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+}
+
+publishing {
+
+    publications {
+
+        publishJar(MavenPublication) {
+
+            artifact jar
+
+            artifact sourcesJar 
+
+            artifact javadocJar {
+                // Each artifact must have
+                // a unique classifier. 
+                // We can set the classifier
+                // via the task as in sourcesJar
+                // or here in the artifact configuration.
+                classifier = 'javadoc'
+            }
+
+            // Or with a Map notation we 
+            // can write:
+            // artifact source: javadocJar, classifier: 'javadoc'
+
+        }
+
+    }
+}

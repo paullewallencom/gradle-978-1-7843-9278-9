@@ -1,0 +1,15 @@
+configurations {
+    vehicles
+    traffic.extendsFrom vehicles
+}
+
+dependencies {
+    // We use the module method to instruct
+    // Gradle to not look for the module descriptor
+    // in a repository, but use the one we have
+    // defined in the build file.
+    vehicles module('com.vehicles:car:2.0') {
+        // Car depends on driver.
+        dependency('com.traffic:driver:1.0')
+    }
+}

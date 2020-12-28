@@ -1,0 +1,19 @@
+repositories {
+    maven {
+        // At this location at the least the
+        // dependency module descriptor files
+        // must be stored.
+        url 'http://ourcompany.com/maven'
+
+        // Define extra locations where artifacts
+        // can be found and downloaded.
+        artifactUrls 'http://ourcompany.com/jars'
+        artifactUrls 'http://ourcompany.com/lib'
+
+        // Alternative syntax is to use the
+        // artifactUrls property assignment:
+        // artifactUrls = [
+        //   'http://ourcompany.com/jars', 'http://ourcompany.com/lib'
+        // ]
+    }
+}

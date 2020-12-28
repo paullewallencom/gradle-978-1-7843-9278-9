@@ -1,0 +1,40 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+configurations {
+    runtime {
+        resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                def requestedModule = details.requested
+
+                // Change resolve rule for log4j:log4j
+                // (transitive) dependency.
+                if (requestedModule.group == 'log4j' 
+                    && requestedModule.name == 'log4j') {
+
+                    // Replace log4j:log4j:<version> with
+                    // org.slf4j:log4j-over-slf4j:1.7.7.
+                    details.useTarget group: 'org.slf4j', 
+                                      name: 'log4j-over-slf4j', 
+                                      version: '1.7.7'
+                    // Alternative syntax:
+                    // useTarget 'org.slf4j:log4j-over-slf4j:1.7.7'
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.7'
+
+    // In real life this is probably a transitive 
+    // dependency from a dependency we need in our project.
+    // We put it here as an example to show we
+    // can completely replace a dependency with
+    // another.
+    runtime 'log4j:log4j:1.2.17'
+    
+    runtime 'ch.qos.logback:logback-classic:1.1.2'
+}

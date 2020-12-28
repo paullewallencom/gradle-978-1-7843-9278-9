@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+// Set the archivesBaseName property,
+// to change the name of the 
+// default project artifact.
+archivesBaseName = 'java_lib'
+
+task artifactsInfo << {
+    // Find archives configuration
+    // and display file name(s)
+    // for artifacts belonging
+    // to the configuration.
+    configurations
+        .findByName('archives')
+        .allArtifacts
+        .each { artifact ->
+            println artifact.file.name
+        }
+}

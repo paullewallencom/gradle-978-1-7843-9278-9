@@ -1,0 +1,22 @@
+repositories {
+    // Define multiple Maven repositories.
+    jcenter()
+    
+    jcenter {
+        name 'Bintray JCenter legacy'
+        url = 'http://jcenter.bintray.com'
+    }
+}
+
+task repositoriesInfo {
+    description 'Display information about repositories'
+
+    doFirst {
+        // Access repositories as collection.
+        project.repositories.each {
+            // Display name and URL for each
+            // repository.
+            println "'${it.name}' uses URL ${it.url}"
+        }
+    }
+}

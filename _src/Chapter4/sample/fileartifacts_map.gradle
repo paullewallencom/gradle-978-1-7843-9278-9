@@ -1,0 +1,38 @@
+//tag::script[]
+apply plugin: 'base'
+
+configurations {
+    readmeDistribution
+}
+
+task docFiles(type:Copy) {
+    from 'src/files'
+    into "${buildDir}/docs"
+    include 'README.txt'
+}
+
+artifacts {
+    // Define file artifact.
+    readmeDistribution(
+        file: "${buildDir}/docs/README.txt",
+        name: 'DO_READ',
+        extension: 'me',
+        type: 'text',
+        classifier: 'docs'
+        builtBy: docFiles
+    )
+}
+//end::script[]
+
+task artifactsInfo << {
+    // Find archives configuration
+    // and display file name(s)
+    // for artifacts belonging
+    // to the configuration.
+    configurations
+        .findByName('readmeDistribution')
+        .allArtifacts
+        .each { artifact ->
+            println "${artifact.name}:${artifact.type}:${artifact.classifier}"
+        }
+}

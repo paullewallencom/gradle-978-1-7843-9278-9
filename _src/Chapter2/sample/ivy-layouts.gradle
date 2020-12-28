@@ -1,0 +1,17 @@
+repositories {
+
+    ivy {
+        // Set layout to maven.
+        layout 'maven'
+        name 'Ivy repository Maven layout'
+        url 'http://ourcompany.com/repo1'
+    }
+
+    ivy {
+        // Set layout to ivy.
+        layout 'ivy'
+        name 'Ivy repository'
+        url 'http://ourcompany.com/repo'
+    }
+
+}

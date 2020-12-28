@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+// Define project properties.
+group = 'com.mrhaki.sample'
+version = '2.1'
+archivesBaseName = 'sample'
+
+// Extra task to check the artifacts.
+task artifactsInfo << {
+    configurations
+        .findByName('archives')
+        .allArtifacts
+        .each { artifact ->
+            println artifact.file.name
+        }
+}

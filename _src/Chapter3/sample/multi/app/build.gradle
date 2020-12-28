@@ -1,0 +1,12 @@
+configurations {
+    vehicles
+    traffic.extendsFrom vehicles
+}
+
+
+dependencies {
+    vehicles project(':vehicles:car')
+    traffic project(':traffic:pedestrian')
+
+    compile configurations.traffic
+}

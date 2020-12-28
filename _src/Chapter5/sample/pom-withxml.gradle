@@ -1,0 +1,38 @@
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+
+version = '2.1.RELEASE'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+    publications {
+        sample(MavenPublication) {
+            from components.java
+
+            pom.withXml {
+                
+                asNode()
+                    .appendNode('organization')
+                    .with {
+                        appendNode('name', 'Gradle')   
+                        appendNode('url', 'http://www.gradle.org')
+                }
+
+                asNode()
+                    .appendNode('issueManagement')
+                    .with {
+                        appendNode('system', 'Jenkins')    
+                        appendNode('url', 'http://buildserver/')
+                    }
+            }
+        }
+    }
+}

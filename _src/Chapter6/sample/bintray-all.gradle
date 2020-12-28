@@ -1,0 +1,67 @@
+// Define Bintray plugin.
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+    }
+}
+
+// Apply plugin to project.
+apply plugin: 'com.jfrog.bintray'
+
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+
+version = '1.0.2.RELEASE'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+    publications {
+        sample(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+bintray {
+    user = bintrayUsername
+    key = bintrayApiKey
+    publications = ['sample']
+
+    publish = true
+
+    pkg {
+        repo = 'book-sample'
+        name = 'full-sample'
+
+        desc = 'Sample package for Gradle book.'
+        
+        websiteUrl = 'https://github.com/mrhaki/gradle-dep-book/'
+        issueTrackerUrl = 'https://github.com/mrhaki/gradle-dep-book/issues'
+        vcsUrl = 'https://github.com/mrhaki/gradle-dep-book.git'
+
+        licenses = ['Apache-2.0']
+
+        labels = ['book', 'sample', 'Gradle']
+
+        publicDownloadNumbers = true
+
+        version {
+            desc = 'Fixed some issues.'
+            released = new Date()
+        }
+
+    }
+
+}

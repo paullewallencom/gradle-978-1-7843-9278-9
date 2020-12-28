@@ -1,0 +1,25 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+configurations {
+    runtime {
+        resolutionStrategy {
+            failOnVersionConflict()
+
+            // Make sure version 1.7.7 is used for
+            // (transitive) dependency org.slf4j:slf4j-api.
+            force 'org.slf4j:slf4j-api:1.7.7'
+
+            // Alternate syntax is to define the 
+            // forced module collection.
+            // forcedModules = ['org.slf4j:slf4j-api:1.7.7']
+        }
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.7'
+
+    runtime 'ch.qos.logback:logback-classic:1.1.2'
+}

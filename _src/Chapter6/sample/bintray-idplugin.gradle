@@ -1,0 +1,27 @@
+// Define and apply Bintray plugin.
+plugins {
+    id 'com.jfrog.bintray' version '1.0'
+}
+
+
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+
+version = '1.0.RELEASE'
+group = 'book.gradle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.1.4.RELEASE'
+}
+
+publishing {
+    publications {
+        sample(MavenPublication) {
+            from components.java
+        }
+    }
+}

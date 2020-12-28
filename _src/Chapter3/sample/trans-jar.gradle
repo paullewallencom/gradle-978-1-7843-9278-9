@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+dependencies {
+    // Dependency definition for Logback classic library
+    compile 'ch.qos.logback:logback-classic:1.1.2@jar'
+
+    // Alternative syntax:
+    //compile group: 'ch.qos.logback', 
+    //        name: 'logback-classic', 
+    //        version: '1.1.2', 
+    //        ext: 'jar'
+}

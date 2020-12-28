@@ -1,0 +1,24 @@
+repositories {
+
+    ivy {
+        url 'http://ourcompany.com/repo'
+
+        // Define pattern with artifact method.
+        // This pattern is used for both Ivy XML files
+        // and artifacts.
+        artifactPattern '[module]/[type]/[artifact]-[revision].[ext]'
+    }
+
+    ivy {
+        url 'http://ourcompany.com/repo1'
+
+        // We can define multiple patterns. The order of the definitions
+        // defines search path.
+        artifactPattern 'binaries/[organisation]/[module]/[artifact]-[revision].[ext]'
+        artifactPattern 'signed-jars/[organisation]/[module]/[artifact]-[revision].[ext]'
+
+        // Seperate definition for Ivy XML files with ivy method.
+        ivyPattern '[organisation]/[module]/metadata/ivy-[revision].xml'
+    }
+
+}

@@ -1,0 +1,18 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+configurations {
+    // Disable transitive dependencies for
+    // all dependencies defined in this
+    // configuration.
+    // Configurations extended
+    // from the compile configuration will not
+    // inherit this transitive property value.
+    compile.transitive = false
+}
+
+dependencies {
+    // Dependency definition for Logback classic
+    compile 'ch.qos.logback:logback-classic:1.1.2'
+}

@@ -1,0 +1,13 @@
+apply plugin: 'java'
+
+repositories {
+    // Repository definition for JCenter Bintray.
+    // Needed to download artifacts. Repository
+    // definitions are covered later.
+    jcenter()
+}
+
+dependencies {
+    // Define dependency on spring-beans library.
+    compile 'org.springframework:spring-beans:4.0.+'
+}

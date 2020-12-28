@@ -1,0 +1,42 @@
+// Import needed for cache methods time unit.
+import java.util.concurrent.TimeUnit
+
+apply plugin: 'java'
+
+repositories.jcenter()
+
+configurations {
+    runtime {
+        resolutionStrategy {
+            // Change expiration time for caching
+            // dynamic version to 30 minutes.
+            cacheDynamicVersionsFor 30, 'minutes'
+
+            // Alternative syntax is using TimeUnit:
+            // cacheDynamicVersionsFor 1, TimeUnit.HOURS
+
+            // Change expiration time for cached
+            // changing modules to 5 minutes using 
+            // java.util.concurrent.TimeUnit.
+            cacheChangingModulesFor 5, TimeUnit.MINUTES
+
+            // Or we could use string notation.
+            // cacheChangingModulesFor 1, 'minutes'
+        }
+    }
+
+    // Alternatively we could apply
+    // this to all configurations:
+    // all {
+    //     resolutionStrategy {
+    //         cacheDynamicVersionsFor 4, 'hours'
+    //         cacheChangingModulesFor 10, 'minutes'
+    //     }  
+    // }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.7'
+
+    runtime 'ch.qos.logback:logback-classic:1.1.2'
+}

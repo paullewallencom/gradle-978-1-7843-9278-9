@@ -1,0 +1,18 @@
+apply plugin: 'java'
+
+repositories.jcenter()
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:latest.integration'
+
+    runtime 'ch.qos.logback:logback-classic:latest.release'
+
+    components {
+        eachComponent { ComponentMetadataDetails details ->
+            details.status = details.id.version 
+            println "status $status = $details.id.version"
+            //details.statusScheme = ['development', 'production']
+            //println "${details.id}: ${details.status} from ${details.statusScheme}"
+        }
+    }
+}

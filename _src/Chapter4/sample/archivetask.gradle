@@ -1,0 +1,29 @@
+// The base plugin adds the
+// build<ConfigurationName> and
+// upload<ConfigurationName> tasks
+// to our project.
+apply plugin: 'base'
+
+// Add archive task that will
+// create a ZIP file with some
+// contents we want to be published.
+task manual(type: Zip) {
+    baseName = 'manual'
+
+    from 'src/manual'
+}
+
+// Create a new artifacts configuration
+// with the name manualDistribution.
+configurations {
+    manualDistribution
+}
+
+// Use the manual archive task
+// to define the artifact for the
+// manualDistribution configuration.
+// Syntax:
+// configurationName archiveTask
+artifacts {
+    manualDistribution manual
+}
